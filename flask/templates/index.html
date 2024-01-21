@@ -7,17 +7,28 @@
     <title>Home</title>
 </head>
 <body>
+
+    
     <h1>Upload your file here!</h1>
 
-
     <form method='POST' enctype='multipart/form-data'>
-        {{form.hidden_tag()}}
-        {{form.file()}}
-        {{form.submit()}}
+        {{ form.hidden_tag() }}
+        {{ form.file() }}
+        {{ form.submit() }}
     </form>
-    <script>
-        
-    </script>
+    
+
+    
+    {% if form.form_submitted.data %}
+        <h1>Data from Python</h1>
+        {% if goodjob %}
+            <p>You did a good job!</p>
+        {% else %}
+            <p>Something went wrong.</p>
+        {% endif %}
+    {% endif %}
+
+    
     
 </body>
 
