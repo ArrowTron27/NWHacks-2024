@@ -8,7 +8,7 @@ import time
 from wtforms.validators import InputRequired
 
 import lib.filter as filt
-PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
+PATH = r"/bin/tesseract"
 
 
 app = Flask(__name__)
