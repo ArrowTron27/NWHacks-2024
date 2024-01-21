@@ -9,7 +9,6 @@ import re
 import dateutil.parser as dparse
 import os
 from datetime import datetime
-import PyPDF2
 
 def parseString(string_input):
     try:
@@ -93,8 +92,8 @@ def extractYears(sentences, min_time):
     return((np.amax(years)-np.amin(years)) >= min_time)
 
 def filter(PATH_TESSERACT, min_time):
-    filename = os.listdir(r"C:\Users\aaron\Documents\GitHub\NWHacks-2024\flask\static\files/")[-1]
-    PATH_PDF = r"C:\Users\aaron\Documents\GitHub\NWHacks-2024\flask\static\files/" + filename
+    filename = os.listdir(r"static/files/")[-1]
+    PATH_PDF = r"static/files/" + filename
     sentences = extractSentences(PATH_TESSERACT, PATH_PDF)
     status = extractYears(sentences, min_time)
     return status
