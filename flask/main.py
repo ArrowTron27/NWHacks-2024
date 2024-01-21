@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileRequired
 from wtforms import FileField, SubmitField, HiddenField
@@ -32,7 +32,8 @@ class UploadFileForm(FlaskForm):
 
 def home():
     form = UploadFileForm()
-    passed = False
+
+    passed = 0
 
     if form.validate_on_submit():
         # Grab the file
@@ -49,7 +50,9 @@ def home():
         # function would return something, the goodjob what should be returned
 
         # This is for Windows
-        passed = filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin")
+        passed = int(filt.filter(PATH,1, poppler_path=r"../poppler-23.11.0/Library/bin"))
+        passed = 0
+        # passed = 1
         # This is for Linux
         # filt.filter(PATH, 10, poppler_path=r"../poppler-23.11.0/Library/bin")
         # filter( tesseract, pdf, time)

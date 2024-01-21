@@ -5,31 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
-    <script src="{{ url_for('static', filename='../scripts/script.js') }}"></script>
-    <script>
-        // var passed = {{ passed|tojson }};
-    </script>
+    
+    <!-- <script type="text/javascript">
+        var passed = {{ passed.passed }}
+    </script> -->
+    <!-- <script text="text/javascript" src="{{ url_for('static', filename='../app.js')}}"></script> -->
+    <script type="text/javascript" src="../static/app.js"></script>
+    <!-- <script type="text/javascript">
+        passed = resumePassed({data|tojson})
+    </script> -->
     <title>Home</title>
-</head>
-<body class="body">
 
     
-    <h1>Upload your resume here!</h1>
+</head>
+<body class="body" onload="resumePassed()">
+    <script>
+        function resumePassed() {
+            if ("{{ passed }}" == "False"){
+                console.log("passed a value")
+            }
+        }
+    </script>
 
-    <form method='POST' enctype='multipart/form-data' id="upload-form">
-        {{ form.hidden_tag() }}
-        {{ form.file() }}
-        {{ form.submit(id="submit-btn")}}
-    </form>
+    <audio src="../static/media/omg.mp3"></audio>
+
+    
+    
+
+    <div id="resume-reader">
+        <h1>Upload your resume here!</h1>
+
+        <form method='POST' enctype='multipart/form-data' id="upload-form">
+            {{ form.hidden_tag() }}
+            {{ form.file() }}
+            {{ form.submit(id="submit-btn")}}
+        </form>
+    </div>
+    
     
     <br>
     
     {% if form.form_submitted.data %}
+    
         {% if passed %}
-            <div class="disappearing-image">
+            <script>
+               function resumePassed() {
+                    // Create a new div element
+                    var disappearingDiv = document.createElement('div');
+                    disappearingDiv.className = "disappearing-image";
+
+                    // Create an image element and set its attributes
+                    var disappearingImage = document.createElement('img');
+                    disappearingImage.src = "../static/media/joboffer.png";
+                    disappearingImage.alt = "Flying Image";
+
+                    // Create an audio element and set its attributes
+                    var disappearingAudio = document.createElement('audio');
+                    var audioSource = document.createElement('source');
+                    audioSource.src = "../static/media/gods.mp3";
+                    audioSource.type = "audio/mpeg";
+                    disappearingAudio.appendChild(audioSource);
+
+                    // Append the image and audio elements to the div
+                    disappearingDiv.appendChild(disappearingImage);
+                    disappearingDiv.appendChild(disappearingAudio);
+
+                    // Append the div to the body or any other element you want
+                    document.body.appendChild(disappearingDiv);
+
+                    disappearingAudio.play();
+                }
+                //resumePassed()
+            </script>
+            <!-- <div class="disappearing-image">
                 <img src="../static/joboffer.png" alt="Flying Image">
                 <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
-            </div>
+            </div>               -->
             <!-- <div class="popup">
                 <label for="popup-toggle" class="overlay"></label>
                 <div class="popup-content">
@@ -38,15 +89,47 @@
                 </div>
             </div> -->
         {% else %}
-            <div class="flying-image">
+        <script>
+            function resumeFailed() {
+                // Create a new div element
+                var flyingDiv = document.createElement('div');
+                flyingDiv.className = "flying-image";
+
+                // Create an image element and set its attributes
+                var flyingImage = document.createElement('img');
+                flyingImage.src = "../static/media/imposter.jpg";
+                flyingImage.alt = "Flying Image";
+
+                // Create an audio element and set its attributes
+                var flyingAudio = document.createElement('audio');
+                var audioSource = document.createElement('source');
+                audioSource.src = "../static/media/eta.mp3";
+                audioSource.type = "audio/mpeg";
+                flyingAudio.appendChild(audioSource);
+                flyingAudio.loop = true;
+
+                // Append the image and audio elements to the div
+                flyingDiv.appendChild(flyingImage);
+                flyingDiv.appendChild(flyingAudio);
+
+                // Append the div to the body or any other element you want
+                document.body.appendChild(flyingDiv);
+
+                // Play the audio automatically
+                flyingAudio.play();
+            }
+            resumeFailed()
+         </script>
+            <!-- <div class="flying-image">
                 <img src="../static/imposter.jpg" alt="Flying Image">
                 
                 <audio controls> <source src="../static/eta.mp3" type="audio/mpeg"></audio>
-            </div>
+            </div> -->
         {% endif %}
+        
     {% endif %}
 
-    <audio controls> <source src="../static/omg.mp3" type="audio/mpeg"></audio>
+    <!-- <audio controls> <source src="../static/omg.mp3" type="audio/mpeg"></audio> -->
     
     
 </body>

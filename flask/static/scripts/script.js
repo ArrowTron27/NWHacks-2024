@@ -29,3 +29,20 @@
 //     });
 // });
 console.log("Script loaded and started")
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("dom loaded") 
+    const audio = document.querySelector("audio");
+    audio.volume = 0.2;
+    audio.play();
+
+});
+
+// window.addEventListener("DOMContentLoaded", event => {
+//     const audio = new Audio(`../gods.mp3`)
+//     audio.volume = 0.2;
+//     audio.play();
+// });
+
+
+// var passed = {{ passed|tojson }};
