@@ -92,8 +92,8 @@ def extractYears(sentences, min_time):
     return((np.amax(years)-np.amin(years)) >= min_time)
 
 def filter(PATH_TESSERACT, min_time):
-    filename = os.listdir('../flask/static/files/')[-1]
-    PATH_PDF = '../flask/static/files/' + filename
+    filename = os.listdir('../static/files/')[-1]
+    PATH_PDF = '../static/files/' + filename
     sentences = extractSentences(PATH_TESSERACT, PATH_PDF)
     status = extractYears(sentences, min_time)
     return status
