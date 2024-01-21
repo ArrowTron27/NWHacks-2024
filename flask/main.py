@@ -18,10 +18,6 @@ app.config['UPLOAD_FOLDER'] = 'static/files'
 form_submitted = None
 
 class UploadFileForm(FlaskForm):
-    # file = FileField("File", validators=[
-    #     FileRequired(),
-    #     FileAllowed(['pdf'], 'Only PDF files are allowed!')
-    #     ])
     file = FileField("File", validators=[InputRequired()])
     submit = SubmitField("Upload File")
     form_submitted = HiddenField("form_submitted")
@@ -50,9 +46,7 @@ def home():
         # function would return something, the goodjob what should be returned
 
         # This is for Windows
-        passed = int(filt.filter(PATH,1, poppler_path=r"../poppler-23.11.0/Library/bin"))
-        passed = 0
-        # passed = 1
+        passed = int(filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin"))
         # This is for Linux
         # filt.filter(PATH, 10, poppler_path=r"../poppler-23.11.0/Library/bin")
         # filter( tesseract, pdf, time)

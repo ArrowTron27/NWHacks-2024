@@ -26,10 +26,6 @@
             }
         }
     </script>
-
-    <audio src="../static/media/omg.mp3"></audio>
-
-    
     
 
     <div id="resume-reader">
@@ -65,6 +61,7 @@
                     audioSource.src = "../static/media/gods.mp3";
                     audioSource.type = "audio/mpeg";
                     disappearingAudio.appendChild(audioSource);
+                    disappearingAudio.loop = true;
 
                     // Append the image and audio elements to the div
                     disappearingDiv.appendChild(disappearingImage);
@@ -75,19 +72,8 @@
 
                     disappearingAudio.play();
                 }
-                //resumePassed()
             </script>
-            <!-- <div class="disappearing-image">
-                <img src="../static/joboffer.png" alt="Flying Image">
-                <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
-            </div>               -->
-            <!-- <div class="popup">
-                <label for="popup-toggle" class="overlay"></label>
-                <div class="popup-content">
-                    <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
-                    <p>Good job! Your message here...</p>
-                </div>
-            </div> -->
+           
         {% else %}
         <script>
             function resumeFailed() {
@@ -120,16 +106,9 @@
             }
             resumeFailed()
          </script>
-            <!-- <div class="flying-image">
-                <img src="../static/imposter.jpg" alt="Flying Image">
-                
-                <audio controls> <source src="../static/eta.mp3" type="audio/mpeg"></audio>
-            </div> -->
         {% endif %}
         
     {% endif %}
-
-    <!-- <audio controls> <source src="../static/omg.mp3" type="audio/mpeg"></audio> -->
     
     
 </body>

@@ -23,7 +23,7 @@ h1 {
 
 .flying-image {
   position: absolute;
-  animation: flyAnimation 5s linear infinite;
+  animation: flyAnimation 5s linear infinite, spinAnimation 5s linear infinite;;
 }
 
 
@@ -41,22 +41,32 @@ h1 {
   }
 }
 
-  .disappearing-image {
-    position: relative;
+@keyframes spinAnimation {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-  .disappearing-image img {
-    max-width: 50%;
-    max-height: 50%;
-    transition: opacity 0.5s ease; /* Add a smooth transition effect */
-    z-index: 100;
-  }
+.disappearing-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .disappearing-image:hover img {
-    opacity: 0; /* Set opacity to 0 when hovering */
-    transform: scale(0);
-  }
+.disappearing-image img {
+  transform: scale(0.5);
+  transition: opacity 0.5s ease; /* Add a smooth transition effect */
+  z-index: 100;
+}
 
-  audio {
-    display: block; /* Ensure the audio controls are on a new line */
-  }
+.disappearing-image:hover img {
+  opacity: 0; /* Set opacity to 0 when hovering */
+}
+
+audio {
+  display: block; /* Ensure the audio controls are on a new line */
+}
