@@ -7,6 +7,8 @@ from pdf2image import convert_from_path
 import matplotlib.pyplot as plt
 import re
 import dateutil.parser as dparse
+import os
+from datetime import datetime
 
 def parseString(string_input):
     try:
@@ -31,9 +33,8 @@ def findDates(string_input):
     return date_list
 
 def extractSentences(PATH_TESSERACT, PATH_PDF):
-    pytesseract.pytesseract.tesseract_cmd = r"/bin/tesseract"
-    path_pdf = r"test/Schneider_Electric_Resume.pdf"
-    image = np.asarray(convert_from_path(path_pdf))[0]
+    pytesseract.pytesseract.tesseract_cmd = PATH_TESSERACT
+    image = np.asarray(convert_from_path(PATH_PDF))[0]
     greyscale = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     ret, thresh = cv2.threshold(greyscale, 0, 255, cv2.THRESH_OTSU)
     rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50,50))
@@ -56,6 +57,7 @@ def extractSentences(PATH_TESSERACT, PATH_PDF):
     return sentences
 
 def extractYears(sentences, min_time):
+    current_date = dparse.parse((datetime.now()).strftime("%Y-%m-%d %H:%M:%S"))
     place = None
     for i in range(len(sentences)):
         if (re.search("experience", sentences[i], re.IGNORECASE)) != None:
@@ -73,8 +75,14 @@ def extractYears(sentences, min_time):
             break
         elif (re.search("extracurricular", sen, re.IGNORECASE) != None):
             break
+        elif (re.search("design team", sen, re.IGNORECASE) != None):
+            break
         else:
             dates = dates + findDates(sen)
+            print(dates)
+            if (re.search("present", sen, re.IGNORECASE) != None) or (re.search("current", sen, re.IGNORECASE) != None):
+                dates = dates + [current_date]
+                
 
     years = []
     for i in range(len(dates)):
@@ -83,16 +91,17 @@ def extractYears(sentences, min_time):
     years = years[years > 999]
     return((np.amax(years)-np.amin(years)) >= min_time)
 
-def filter(PATH_TESSERACT, PATH_PDF, min_time):
+def filter(PATH_TESSERACT, min_time):
+    filename = os.listdir('../flask/static/files/')[-1]
+    PATH_PDF = '../flask/static/files/' + filename
     sentences = extractSentences(PATH_TESSERACT, PATH_PDF)
     status = extractYears(sentences, min_time)
     return status
 
 def main():
-    PATH_TESSERACT = ""
-    PATH_PDF = ""
-    min_time = 0
-    filter(PATH_TESSERACT, PATH_PDF, min_time)
+    PATH_TESSERACT = "/bin/tesseract"
+    min_time = 10
+    print(filter(PATH_TESSERACT, min_time))
 
 if __name__ == "__main__":
     main()
