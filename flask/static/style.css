@@ -3,7 +3,9 @@
 }
 
 .body {
-    background-color: lightblue;
+    background-image: url("newjeans.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 
 /* add here for choose file and upload buttons */

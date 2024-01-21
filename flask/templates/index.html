@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/scripts/script.js"></script>
     <title>Home</title>
 </head>
 <body class="body">
@@ -12,10 +13,10 @@
     
     <h1>Upload your file here!</h1>
 
-    <form method='POST' enctype='multipart/form-data'>
+    <form method='POST' enctype='multipart/form-data' id="upload-form">
         {{ form.hidden_tag() }}
         {{ form.file() }}
-        {{ form.submit() }}
+        {{ form.submit(id="submit-btn")}}
     </form>
     
 
@@ -29,6 +30,7 @@
         {% endif %}
     {% endif %}
 
+    <audio controls> <source src="../static/omg.mp3" type="audio/mpeg"></audio>
     
     
 </body>

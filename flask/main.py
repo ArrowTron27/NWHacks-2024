@@ -25,6 +25,7 @@ class UploadFileForm(FlaskForm):
 
 @app.route('/', methods=['GET',"POST"])
 @app.route('/home', methods=['GET',"POST"])
+
 def home():
     form = UploadFileForm()
     goodjob = False
