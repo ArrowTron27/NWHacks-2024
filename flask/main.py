@@ -8,7 +8,8 @@ import time
 from wtforms.validators import InputRequired
 
 import lib.filter as filt
-PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
+# PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
+PATH = r"/bin/tesseract"
 
 
 app = Flask(__name__)
@@ -46,10 +47,10 @@ def home():
         # function would return something, the goodjob what should be returned
 
         # This is for Windows
-        passed = int(filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin"))
+        # passed = int(filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin"))
+
         # This is for Linux
-        # filt.filter(PATH, 10, poppler_path=r"../poppler-23.11.0/Library/bin")
-        # filter( tesseract, pdf, time)
+        passed = int(filt.filter(PATH, 10))
         form.form_submitted.data = True
 
     return render_template('index.html', form=form, passed=passed)

@@ -93,7 +93,10 @@ def extractYears(sentences, min_time):
         years.append(dates[i].year)
     years = np.asarray(years)
     years = years[years > 999]
-    return((np.amax(years)-np.amin(years)) >= min_time)
+    if years.size == 0:
+        return False
+    else:
+        return((np.amax(years)-np.amin(years)) >= min_time)
 
 def filter(PATH_TESSERACT, min_time, poppler_path = ""):
     filename = os.listdir(r"static/files/")[-1]
