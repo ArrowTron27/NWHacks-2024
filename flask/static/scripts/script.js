@@ -28,3 +28,4 @@
 //         submitBtn.value = "Uploading...";
 //     });
 // });
+console.log("Script loaded and started")

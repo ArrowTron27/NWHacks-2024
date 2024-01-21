@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
-    <script src="../static/scripts/script.js"></script>
+    <script src="{{ url_for('static', filename='../scripts/script.js') }}"></script>
+    <script>
+        // var passed = {{ passed|tojson }};
+    </script>
     <title>Home</title>
 </head>
 <body class="body">
@@ -22,11 +25,24 @@
     <br>
     
     {% if form.form_submitted.data %}
-        <h1>Data from Python</h1>
-        {% if goodjob %}
-            <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
+        {% if passed %}
+            <div class="disappearing-image">
+                <img src="../static/joboffer.png" alt="Flying Image">
+                <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
+            </div>
+            <!-- <div class="popup">
+                <label for="popup-toggle" class="overlay"></label>
+                <div class="popup-content">
+                    <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
+                    <p>Good job! Your message here...</p>
+                </div>
+            </div> -->
         {% else %}
-            <p>Something went wrong.</p>
+            <div class="flying-image">
+                <img src="../static/imposter.jpg" alt="Flying Image">
+                
+                <audio controls> <source src="../static/eta.mp3" type="audio/mpeg"></audio>
+            </div>
         {% endif %}
     {% endif %}
 

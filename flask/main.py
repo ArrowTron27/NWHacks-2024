@@ -32,7 +32,7 @@ class UploadFileForm(FlaskForm):
 
 def home():
     form = UploadFileForm()
-    goodjob = False
+    passed = False
 
     if form.validate_on_submit():
         # Grab the file
@@ -49,15 +49,13 @@ def home():
         # function would return something, the goodjob what should be returned
 
         # This is for Windows
-        filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin")
-
+        passed = filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin")
         # This is for Linux
         # filt.filter(PATH, 10, poppler_path=r"../poppler-23.11.0/Library/bin")
         # filter( tesseract, pdf, time)
-        goodjob = True
         form.form_submitted.data = True
 
-    return render_template('index.html', form=form, goodjob=goodjob)
+    return render_template('index.html', form=form, passed=passed)
 
 if __name__ == '__main__':
     app.run(debug=True)

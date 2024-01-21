@@ -18,3 +18,41 @@ h1 {
     color: yellow;
     font-family: Papyrus;
 }
+
+@keyframes fly-around {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .flying-image {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    animation: fly-around 2s linear infinite; /* Adjust the animation duration and timing function */
+  }
+
+  .flying-image img {
+    width: 100%; /* Adjust the width as needed */
+    height: 100%; /* Adjust the height as needed */
+  }
+
+  .disappearing-image {
+    top: -10%;
+    left: -15%;
+    position: relative;
+    
+  }
+
+  .disappearing-image img {
+    width: 100%; /* Adjust the width as needed */
+    height: 100%; /* Adjust the height as needed */
+    transition: opacity 0.5s ease; /* Add a smooth transition effect */
+  }
+
+  .disappearing-image:hover img {
+    opacity: 0; /* Set opacity to 0 when hovering */
+  }
+
+  audio {
+    display: block; /* Ensure the audio controls are on a new line */
+  }
