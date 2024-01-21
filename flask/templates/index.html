@@ -5,27 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/style.css">
-    
-    <!-- <script type="text/javascript">
-        var passed = {{ passed.passed }}
-    </script> -->
-    <!-- <script text="text/javascript" src="{{ url_for('static', filename='../app.js')}}"></script> -->
-    <script type="text/javascript" src="../static/app.js"></script>
-    <!-- <script type="text/javascript">
-        passed = resumePassed({data|tojson})
-    </script> -->
     <title>Home</title>
-
     
 </head>
-<body class="body" onload="resumePassed()">
-    <script>
-        function resumePassed() {
-            if ("{{ passed }}" == "False"){
-                console.log("passed a value")
-            }
-        }
-    </script>
+<body class="body">
     
 
     <div id="resume-reader">
@@ -97,6 +80,7 @@
                 // Append the image and audio elements to the div
                 flyingDiv.appendChild(flyingImage);
                 flyingDiv.appendChild(flyingAudio);
+
 
                 // Append the div to the body or any other element you want
                 document.body.appendChild(flyingDiv);

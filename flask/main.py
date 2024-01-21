@@ -8,8 +8,8 @@ import time
 from wtforms.validators import InputRequired
 
 import lib.filter as filt
-# PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
-PATH = r"/bin/tesseract"
+PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
+# PATH = r"/bin/tesseract"
 
 
 app = Flask(__name__)
@@ -18,6 +18,7 @@ app.config['UPLOAD_FOLDER'] = 'static/files'
 
 form_submitted = None
 
+# Upload the file
 class UploadFileForm(FlaskForm):
     file = FileField("File", validators=[InputRequired()])
     submit = SubmitField("Upload File")
@@ -32,6 +33,7 @@ def home():
 
     passed = 0
 
+    # When the form is submitted
     if form.validate_on_submit():
         # Grab the file
         file = form.file.data 
@@ -43,16 +45,18 @@ def home():
 
         # Save the file
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],filename))
-        # Call douglases function
-        # function would return something, the goodjob what should be returned
-
+        
+        # Return the data from the passed resumes
         # This is for Windows
-        # passed = int(filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin"))
+        passed = int(filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin"))
 
         # This is for Linux
-        passed = int(filt.filter(PATH, 10))
+        # passed = int(filt.filter(PATH, 10))
+
+        # Form as been submitted
         form.form_submitted.data = True
 
+    # Return the rendered properties
     return render_template('index.html', form=form, passed=passed)
 
 if __name__ == '__main__':
