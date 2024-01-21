@@ -4,6 +4,7 @@ from flask_wtf.file import FileAllowed, FileRequired
 from wtforms import FileField, SubmitField, HiddenField
 from werkzeug.utils import secure_filename
 import os
+import time
 from wtforms.validators import InputRequired
 
 app = Flask(__name__)
@@ -31,11 +32,19 @@ def home():
     if form.validate_on_submit():
         # Grab the file
         file = form.file.data 
+
+        # Generate a unique filename based on the current time
+        current_time = time.strftime("%Y%m%d%H%M%S")
+        _, file_extension = os.path.splitext(file.filename)
+        filename = f"{current_time}{file_extension}"
+
+
         # Save the file
-        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],filename))
         # Call douglases function
         # function would return something, the goodjob what should be returned
-        goodjob = False
+        # filter( tesseract, pdf, time)
+        goodjob = True
         form.form_submitted.data = True
         # render_template('index.html', data=data)
         # return "File has been uploaded"
