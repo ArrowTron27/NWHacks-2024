@@ -11,5 +11,10 @@
     width: 50%;
     padding: 100px;
     top: 30%;
-    left: 30%;
+    left: 35%;
+}
+
+h1 {
+    color: yellow;
+    font-family: Papyrus;
 }

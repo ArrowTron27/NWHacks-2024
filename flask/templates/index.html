@@ -11,7 +11,7 @@
 <body class="body">
 
     
-    <h1>Upload your file here!</h1>
+    <h1>Upload your resume here!</h1>
 
     <form method='POST' enctype='multipart/form-data' id="upload-form">
         {{ form.hidden_tag() }}
@@ -24,7 +24,7 @@
     {% if form.form_submitted.data %}
         <h1>Data from Python</h1>
         {% if goodjob %}
-            <p>You did a good job!</p>
+            <audio controls> <source src="../static/gods.mp3" type="audio/mpeg"></audio>
         {% else %}
             <p>Something went wrong.</p>
         {% endif %}

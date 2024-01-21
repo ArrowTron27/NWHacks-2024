@@ -9,6 +9,7 @@ import re
 import dateutil.parser as dparse
 import os
 from datetime import datetime
+import PyPDF2
 
 def parseString(string_input):
     try:
@@ -34,7 +35,7 @@ def findDates(string_input):
 
 def extractSentences(PATH_TESSERACT, PATH_PDF):
     pytesseract.pytesseract.tesseract_cmd = PATH_TESSERACT
-    image = np.asarray(convert_from_path(PATH_PDF))[0]
+    image = np.asarray(convert_from_path(PATH_PDF, 500))[0]
     greyscale = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     ret, thresh = cv2.threshold(greyscale, 0, 255, cv2.THRESH_OTSU)
     rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50,50))
@@ -92,8 +93,8 @@ def extractYears(sentences, min_time):
     return((np.amax(years)-np.amin(years)) >= min_time)
 
 def filter(PATH_TESSERACT, min_time):
-    filename = os.listdir('../static/files/')[-1]
-    PATH_PDF = '../static/files/' + filename
+    filename = os.listdir(r"C:\Users\aaron\Documents\GitHub\NWHacks-2024\flask\static\files/")[-1]
+    PATH_PDF = r"C:\Users\aaron\Documents\GitHub\NWHacks-2024\flask\static\files/" + filename
     sentences = extractSentences(PATH_TESSERACT, PATH_PDF)
     status = extractYears(sentences, min_time)
     return status
