@@ -8,7 +8,7 @@ import time
 from wtforms.validators import InputRequired
 
 import lib.filter as filt
-PATH = r"/bin/tesseract"
+PATH = r"C:\Program Files\Tesseract-OCR/tesseract.exe"
 
 
 app = Flask(__name__)
@@ -47,7 +47,12 @@ def home():
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],filename))
         # Call douglases function
         # function would return something, the goodjob what should be returned
-        filt.filter(PATH,10)
+
+        # This is for Windows
+        filt.filter(PATH,10, poppler_path=r"../poppler-23.11.0/Library/bin")
+
+        # This is for Linux
+        # filt.filter(PATH, 10, poppler_path=r"../poppler-23.11.0/Library/bin")
         # filter( tesseract, pdf, time)
         goodjob = True
         form.form_submitted.data = True

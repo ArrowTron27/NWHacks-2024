@@ -32,9 +32,13 @@ def findDates(string_input):
             list.pop(0)
     return date_list
 
-def extractSentences(PATH_TESSERACT, PATH_PDF):
+def extractSentences(PATH_TESSERACT, PATH_PDF, poppler_path = ""):
+    print(poppler_path)
     pytesseract.pytesseract.tesseract_cmd = PATH_TESSERACT
-    image = np.asarray(convert_from_path(PATH_PDF, 500))[0]
+    if poppler_path != "":
+        image = np.asarray(convert_from_path(PATH_PDF, poppler_path=poppler_path))[0]
+    else:
+        image = np.asarray(convert_from_path(PATH_PDF))[0]
     greyscale = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     ret, thresh = cv2.threshold(greyscale, 0, 255, cv2.THRESH_OTSU)
     rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50,50))
@@ -91,10 +95,10 @@ def extractYears(sentences, min_time):
     years = years[years > 999]
     return((np.amax(years)-np.amin(years)) >= min_time)
 
-def filter(PATH_TESSERACT, min_time):
+def filter(PATH_TESSERACT, min_time, poppler_path = ""):
     filename = os.listdir(r"static/files/")[-1]
     PATH_PDF = r"static/files/" + filename
-    sentences = extractSentences(PATH_TESSERACT, PATH_PDF)
+    sentences = extractSentences(PATH_TESSERACT, PATH_PDF, poppler_path = poppler_path)
     status = extractYears(sentences, min_time)
     return status
 
