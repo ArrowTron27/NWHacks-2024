@@ -38,7 +38,6 @@ def home():
         _, file_extension = os.path.splitext(file.filename)
         filename = f"{current_time}{file_extension}"
 
-
         # Save the file
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],filename))
         # Call douglases function
@@ -46,8 +45,6 @@ def home():
         # filter( tesseract, pdf, time)
         goodjob = True
         form.form_submitted.data = True
-        # render_template('index.html', data=data)
-        # return "File has been uploaded"
 
     return render_template('index.html', form=form, goodjob=goodjob)
 
